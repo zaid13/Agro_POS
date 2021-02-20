@@ -1,5 +1,7 @@
+import 'package:agro_pos/admin/Menu.dart';
 import 'package:agro_pos/admin/auth/register.dart';
 import 'package:agro_pos/admin/manage/manageEmployee.dart';
+import 'package:agro_pos/user/modal/UserTileModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -330,7 +332,7 @@ class _Admin_LoginState extends State<Admin_Login> {
                           
                           print(_formKey.currentState.value);
                           var respose =  await LoginUser(_formKey.currentState.value);
-                          showpopup(respose);
+                          showpopup(respose,_formKey.currentState.value);
                         } else {
                           print("validation failed");
                         }
@@ -385,7 +387,7 @@ class _Admin_LoginState extends State<Admin_Login> {
 
     return t;
   }
-  showpopup(res){
+  showpopup(res,data){
     if(res==null)
     {
       Alert(
@@ -426,6 +428,6 @@ class _Admin_LoginState extends State<Admin_Login> {
     ).show();
 
     // Manage_Employee
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_Employee(),));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModalfromMap(data )),));
   }
 }

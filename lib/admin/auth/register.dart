@@ -1,3 +1,5 @@
+import 'package:agro_pos/admin/Menu.dart';
+import 'package:agro_pos/user/modal/UserTileModal.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_pos/admin/manage/manageEmployee.dart';
 import 'package:flutter/material.dart';
@@ -205,6 +207,6 @@ class _Admin_RegisterState extends State<Admin_Register> {
     ).show();
 
     // Manage_Employee
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_Employee(),));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
   }
 }

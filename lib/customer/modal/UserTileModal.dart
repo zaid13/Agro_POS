@@ -5,19 +5,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UserModal{
+class CustomerModal{
   String Email;
   String Name;
 
-
-  initUserModalfromMap(Map data){
+  initCustomerModalfromMap(Map data){
 
     this.Email =data['Email'];
     this.Name =data['Name']??'';
 
     return this;
   }
-  initUserModal(QueryDocumentSnapshot data){
+
+  initCustomerModal(QueryDocumentSnapshot data){
 
   this.Email =data.data()['Email'];
   this.Name =data.data()['Name']??'';
@@ -26,8 +26,8 @@ class UserModal{
 }
 
    getTile(data,context){
-    if(Email==null)
-    initUserModal(data);
+    if(this.Email==null)
+    initCustomerModal(data);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -97,9 +97,9 @@ class UserModal{
       ),
     );
   }
-
-    toMap(){
+  toMap(){
     return {'Email':Email,'Name':Name};
 
-    }
+  }
+
 }
