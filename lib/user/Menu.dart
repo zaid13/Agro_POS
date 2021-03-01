@@ -21,7 +21,9 @@ class _Admin_MenuState extends State<Customer_Menu> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Menu'),
+        backgroundColor: Colors.lightGreen,
         ),
+
         body: Container(
 
           child: Column(

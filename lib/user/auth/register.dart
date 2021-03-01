@@ -25,6 +25,8 @@ class _User_RegisterState extends State<User_Register> {
     return SafeArea(
       child: Scaffold(
         appBar:AppBar(
+          backgroundColor: Colors.lightGreen,
+
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text('Register User'),
@@ -438,13 +440,15 @@ class _User_RegisterState extends State<User_Register> {
             "COOL",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () { Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
+
+          },
           width: 120,
         )
       ],
     ).show();
 
     // Manage_Employee
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
   }
 }

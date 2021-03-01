@@ -20,6 +20,8 @@ class _Manage_productsState extends State<Manage_products> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
+
           title: Row(
             mainAxisAlignment:MainAxisAlignment.spaceBetween ,
             children: [

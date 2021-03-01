@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-
+import 'package:agro_pos/receipt/pdfGenerator/pdfGen.dart';
 
 import 'package:agro_pos/customer/modal/UserTileModal.dart';
 import 'package:agro_pos/products/products_modal.dart';
@@ -16,7 +16,7 @@ class ReceiptModal{
   DateTime dateTime;
   CustomerModal customerModal;
   UserModal userModal;
-  Products_Modal products_modal;
+  List<Products_Modal> products_modal_list;
 
 
 
@@ -26,8 +26,8 @@ class ReceiptModal{
 
 
   this.userModal = UserModal().initUserModalfromMap(data.data()['user'] as Map);
-  this.customerModal =CustomerModal().initCustomerModalfromMap(data.data()['customer']  as Map);
-  this.products_modal = Products_Modal().init_Products_modalfromMap(data.data()['product'] as Map);
+  customerModal =CustomerModal().initCustomerModalfromMap(data.data()['customer']  as Map);
+  this.products_modal_list = Products_Modal().init_Products_modalfromALL_List(data.data()['product']);
 
   this.dateTime  =   data.data()['time'] .toDate();
   this.id =   data.data()['id'];
@@ -35,41 +35,60 @@ class ReceiptModal{
   return this;
 }
 
-  getTile(data,context){
+    getTile(data,context){
      init_ReceiptModal(data);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 600,
+
         color: Colors.black.withOpacity(0.1),
         width: MediaQuery.of(context).size.width,
         alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          crossAxisAlignment:CrossAxisAlignment.center ,
-  children: [
-
-          Expanded(
         child: Column(
-          mainAxisAlignment:MainAxisAlignment.center ,
+          mainAxisAlignment:MainAxisAlignment.start ,
 
           crossAxisAlignment:CrossAxisAlignment.start ,
           children: [
-            Row(
+            RaisedButton(
+              color:Colors.black.withOpacity(0.2),
+              onPressed: (){CreatePdf.generateInvoice(this);},
+              child: Row(
+                children: [
+
+                  Icon( Icons.inventory,color: Colors.white,),
+                  Text('Generate Invoice',style: TextStyle(color: Colors.white),)
+                ],
+
+              ),
+            ),
+            Column(
               children: [
-                Text(id),
+
+
+                Text('ID:    '+id),
                 Text(DateFormat('h:mm a EEE, MMM d, ''yy').format(dateTime))
 
               ],
             ),
 
             Text('Product',style: TextStyle(fontSize: 20),),
-            products_modal.getTile(data, context),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: ListView.builder(
+                itemCount: products_modal_list.length,
+                itemBuilder: (context, index) => products_modal_list[index].getTileWithouButton(data, context),),
+            ),
             Text('Customer',style: TextStyle(fontSize: 20),),
-            customerModal.getTile(data, context),
+            customerModal.getTileWithouButton(data, context),
             Text('User',style: TextStyle(fontSize: 20),),
-            userModal.getTile(data, context)
+            userModal.getTileWithouButton(data, context),
+Row(children: [
 
+  Text('Total'),
+  Expanded(child: Text(calculateTotal.toString(),style: TextStyle(color: Colors.green,fontSize: 22),))
+],)
 
 
 
@@ -78,12 +97,17 @@ class ReceiptModal{
 
         ),
       ),
-
-  ]
-          ,
-),
-      ),
     );
   }
+  double calculateTotal(){
+    double cost = 0;
+
+    products_modal_list.forEach((element) {
+      cost+=element.calculateCost();
+    });
+    print(cost);
+    return cost;
+}
+
 
 }

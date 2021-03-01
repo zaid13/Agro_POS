@@ -97,6 +97,53 @@ class UserModal{
       ),
     );
   }
+  getTileWithouButton(data,context){
+    if(Email==null)
+      initUserModal(data);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 80,
+        color: Colors.black.withOpacity(0.1),
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.center ,
+          crossAxisAlignment:CrossAxisAlignment.center ,
+          children: [
+            Column(
+              mainAxisAlignment:MainAxisAlignment.center ,
+
+              crossAxisAlignment:CrossAxisAlignment.start ,
+              children: [
+                Text('Name:    ',style: TextStyle(fontSize: 16),),
+                Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+
+
+              ],
+
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment:MainAxisAlignment.center ,
+
+                crossAxisAlignment:CrossAxisAlignment.start ,
+                children: [
+                  Text(Name,style: TextStyle(fontSize: 16),),
+                  Text(Email,style: TextStyle(fontSize: 16),),
+
+                ],
+
+              ),
+            ),
+
+
+          ]
+          ,
+        ),
+      ),
+    );
+  }
 
     toMap(){
     return {'Email':Email,'Name':Name};

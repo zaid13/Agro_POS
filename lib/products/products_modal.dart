@@ -12,6 +12,19 @@ class Products_Modal{
   int quantity_left ;
 
 
+  double calculateCost(){
+    return price * quantity_left;
+
+  }
+
+  init_Products_modalfromALL_List(List data){
+    List <Products_Modal> ls = [];
+
+    data.forEach((element) {
+      ls.add(init_Products_modalfromMap(element));
+    });
+   return ls;
+  }
   init_Products_modalfromMap(Map data){
 
     this.Name = data['Name'];
@@ -92,6 +105,52 @@ mainAxisAlignment:MainAxisAlignment.center ,
 
       ],
       ),
+      ),
+    );
+
+  }
+  Widget getTileWithouButton(data , BuildContext context){
+    if(id==null)
+      init_Products_modal(data);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(height: 100,
+        color: Colors.black.withOpacity(0.1),
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.center ,
+          crossAxisAlignment:CrossAxisAlignment.center ,
+          children: [
+            Column(
+              mainAxisAlignment:MainAxisAlignment.center ,
+
+              crossAxisAlignment:CrossAxisAlignment.start ,
+              children: [
+                Text('Name   '),
+                Text('id   '),
+                Text('price   '),
+                Text('quantity_left   '),
+              ],
+            ),
+            Column(
+              mainAxisAlignment:MainAxisAlignment.center ,
+
+
+              crossAxisAlignment:CrossAxisAlignment.start ,
+
+              children: [
+                Text('${Name}   '),
+                Text('${id}   '),
+                Text('${price}   '),
+                Text('${quantity_left}   '),
+
+
+              ],
+            ),
+
+          ],
+        ),
       ),
     );
 

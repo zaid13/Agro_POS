@@ -24,6 +24,8 @@ class _Admin_LoginState extends State<Admin_Login> {
     return SafeArea(
       child: Scaffold(
         appBar:AppBar(
+          backgroundColor: Colors.lightGreen,
+
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text('Login Admin'),
@@ -40,168 +42,12 @@ class _Admin_LoginState extends State<Admin_Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    /*          FormBuilderFilterChip(
-                      name: 'filter_chip',
-                      decoration: InputDecoration(
-                        labelText: 'Select many options',
-                      ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Test', child: Text('Test')),
-                        FormBuilderFieldOption(
-                            value: 'Test 1', child: Text('Test 1')),
-                        FormBuilderFieldOption(
-                            value: 'Test 2', child: Text('Test 2')),
-                        FormBuilderFieldOption(
-                            value: 'Test 3', child: Text('Test 3')),
-                        FormBuilderFieldOption(
-                            value: 'Test 4', child: Text('Test 4')),
-                      ],
-                    ),
-                    FormBuilderChoiceChip(
-                      name: 'choice_chip',
-                      decoration: InputDecoration(
-                        labelText: 'Select an option',
-                      ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Test', child: Text('Test')),
-                        FormBuilderFieldOption(
-                            value: 'Test 1', child: Text('Test 1')),
-                        FormBuilderFieldOption(
-                            value: 'Test 2', child: Text('Test 2')),
-                        FormBuilderFieldOption(
-                            value: 'Test 3', child: Text('Test 3')),
-                        FormBuilderFieldOption(
-                            value: 'Test 4', child: Text('Test 4')),
-                      ],
-                    ),
-                    FormBuilderColorPickerField(
-                      name: 'color_picker',
-                      // initialValue: Colors.yellow,
-                      colorPickerType: ColorPickerType.MaterialPicker,
-                      decoration: InputDecoration(labelText: 'Pick Color'),
-                    ),
-                    FormBuilderChipsInput(
-                      decoration: InputDecoration(labelText: 'Chips'),
-                      name: 'chips_test',
-                      onChanged: _onChanged,
-                      initialValue: [
-                        Contact('Andrew', 'stock@man.com',
-                            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'),
-                      ],
-                      maxChips: 5,
-                      findSuggestions: (String query) {
-                        if (query.isNotEmpty) {
-                          var lowercaseQuery = query.toLowerCase();
-                          return contacts.where((profile) {
-                            return profile.name
-                                .toLowerCase()
-                                .contains(query.toLowerCase()) ||
-                                profile.email
-                                    .toLowerCase()
-                                    .contains(query.toLowerCase());
-                          }).toList(growable: false)
-                            ..sort((a, b) => a.name
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)
-                                .compareTo(b.name
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)));
-                        } else {
-                          return const <Contact>[];
-                        }
-                      },
-                      chipBuilder: (context, state, profile) {
-                        return InputChip(
-                          key: ObjectKey(profile),
-                          label: Text(profile.name),
-                          avatar: CircleAvatar(
-                            backgroundImage: NetworkImage(profile.imageUrl),
-                          ),
-                          onDeleted: () => state.deleteChip(profile),
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        );
-                      },
-                      suggestionBuilder: (context, state, profile) {
-                        return ListTile(
-                          key: ObjectKey(profile),
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(profile.imageUrl),
-                          ),
-                          title: Text(profile.name),
-                          subtitle: Text(profile.email),
-                          onTap: () => state.selectSuggestion(profile),
-                        );
-                      },
-                    ),
-                    FormBuilderDateTimePicker(
-                      name: 'date',
-                      // onChanged: _onChanged,
-                      inputType: InputType.time,
-                      decoration: InputDecoration(
-                        labelText: 'Appointment Time',
-                      ),
-                      initialTime: TimeOfDay(hour: 8, minute: 0),
-                      // initialValue: DateTime.now(),
-                      // enabled: true,
-                    ),
-                    FormBuilderDateRangePicker(
-                      name: 'date_range',
-                      firstDate: DateTime(1970),
-                      lastDate: DateTime(2030),
-                      format: DateFormat('yyyy-MM-dd'),
-                      onChanged: _onChanged,
-                      decoration: InputDecoration(
-                        labelText: 'Date Range',
-                        helperText: 'Helper text',
-                        hintText: 'Hint text',
-                      ),
-                    ),
-                    FormBuilderSlider(
-                      name: 'slider',
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.min(context, 6),
-                      ]),
-                      onChanged: _onChanged,
-                      min: 0.0,
-                      max: 10.0,
-                      initialValue: 7.0,
-                      divisions: 20,
-                      activeColor: Colors.red,
-                      inactiveColor: Colors.pink[100],
-                      decoration: InputDecoration(
-                        labelText: 'Number of things',
-                      ),
-                    ),
-                    FormBuilderCheckbox(
-                      name: 'accept_terms',
-                      initialValue: false,
-                      onChanged: _onChanged,
-                      title: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'I have read and agree to the ',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            TextSpan(
-                              text: 'Terms and Conditions',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                          ],
-                        ),
-                      ),
-                      validator: FormBuilderValidators.equal(
-                        context,
-                        true,
-                        errorText:
-                        'You must accept terms and conditions to continue',
-                      ),
-                    ),*/
                     FormBuilderTextField(
+                      // initialValue: 'Polo2322@gmail.com',
+                      controller: TextEditingController(text: 'Polo2322@gmail.com'),
                       name: 'Email',
                       decoration: InputDecoration(
+
                         labelText:
                         'Email',
                       ),
@@ -217,7 +63,8 @@ class _Admin_LoginState extends State<Admin_Login> {
                     Container(height: 20,),
                     FormBuilderTextField(
                       name: 'Password',
-
+// initialValue: 'Admin1234',
+                    controller: TextEditingController(text: 'Admin1234'),
                       decoration: InputDecoration(
                         labelText:
                         'Password',
@@ -421,13 +268,18 @@ class _Admin_LoginState extends State<Admin_Login> {
             "COOL",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModalfromMap(data )),));
+
+          },
+
           width: 120,
         )
       ],
     ).show();
 
     // Manage_Employee
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModalfromMap(data )),));
   }
 }

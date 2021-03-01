@@ -24,30 +24,34 @@ class _Manage_custoreceipt extends State<Manage_receipt> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-            children: [
-              Text('Manage Receipt'),
-              FlatButton(
-                onPressed: (){
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => Receipt_Register(widget.userModal),));
-                },
-                child: Icon(Icons.add,color: Colors.white,size: 28,),
-              ),
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.lightGreen,
 
-            ],
+            title: Row(
+              mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+              children: [
+                Text('Manage Receipt'),
+                FlatButton(
+                  onPressed: (){
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => Receipt_Register(widget.userModal),));
+                  },
+                  child: Icon(Icons.add,color: Colors.white,size: 28,),
+                ),
+
+              ],
+            ),
+
           ),
 
-        ),
+          body: FutureBuilder(
 
-        body: FutureBuilder(
+            future: FirebaseFirestore.instance.collection('receipt').get(),
+            builder: (context, snapshot) => snapshot.hasData?CustomerList(snapshot.data):ModalProgressHUD(inAsyncCall: true, child: Container()),
 
-          future: FirebaseFirestore.instance.collection('receipt').get(),
-          builder: (context, snapshot) => snapshot.hasData?CustomerList(snapshot.data):ModalProgressHUD(inAsyncCall: true, child: Container()),
-
-        ));
+          )),
+    );
   }
   CustomerList(data){
 

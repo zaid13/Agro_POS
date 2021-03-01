@@ -1,4 +1,5 @@
 import 'package:agro_pos/admin/manage/manageEmployee.dart';
+import 'package:agro_pos/sharedpreference/sharepreference.dart';
 import 'package:agro_pos/user/Menu.dart';
 import 'package:agro_pos/user/modal/UserTileModal.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,8 @@ bool  isloading = false;
                   children: <Widget>[
                     FormBuilderTextField(
                       name: 'Email',
+                      // initialValue: 'gehehe@zcapin.com',
+                      controller: TextEditingController(text:'gehehe@zcapin.com' ),
                       decoration: InputDecoration(
                         labelText:
                         'Email',
@@ -50,7 +53,8 @@ bool  isloading = false;
                     Container(height: 20,),
                     FormBuilderTextField(
                       name: 'Password',
-
+// initialValue: 'gsgsgsg',
+                        controller: TextEditingController(text: 'gsgsgsg'),
                       decoration: InputDecoration(
                         labelText:
                         'Password',
@@ -173,12 +177,16 @@ bool  isloading = false;
             "COOL",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {Navigator.pop(context);
+          UserModal userModal = UserModal().initUserModal(res );
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Customer_Menu(userModal )));
+
+          },
           width: 120,
         )
       ],
     ).show();
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Customer_Menu(UserModal().initUserModal(res )),));
   }
     }

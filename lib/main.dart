@@ -1,8 +1,10 @@
 import 'package:agro_pos/admin/auth/login.dart';
+import 'package:agro_pos/receipt/pdfGenerator/pdfGen.dart';
 import 'package:agro_pos/user/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -32,7 +34,16 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Agro POS'),
+      home: FutureBuilder(
+          future: SharedPreferences.getInstance(),
+
+      builder: (context, snapshot){
+            return  MyHomePage(title: 'Agro POS');
+
+
+      },
+
+      ),
     );
   }
 }
@@ -79,6 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
+
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),

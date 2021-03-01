@@ -26,6 +26,8 @@ class _Product_RegisterState extends State<Product_Register> {
     return SafeArea(
       child: Scaffold(
         appBar:AppBar(
+          backgroundColor: Colors.lightGreen,
+
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text('Register Product'),

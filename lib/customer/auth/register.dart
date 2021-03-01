@@ -24,6 +24,8 @@ class _Customer_RegisterState extends State<Customer_Register> {
     return SafeArea(
       child: Scaffold(
         appBar:AppBar(
+          backgroundColor: Colors.lightGreen,
+
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text('Register Customer'),

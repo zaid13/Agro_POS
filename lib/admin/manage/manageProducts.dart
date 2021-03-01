@@ -22,6 +22,8 @@ class _Manage_customerState extends State<Manage_customer> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
+
           title: Row(
             mainAxisAlignment:MainAxisAlignment.spaceBetween ,
             children: [

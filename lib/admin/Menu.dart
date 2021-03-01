@@ -20,6 +20,8 @@ class _Admin_MenuState extends State<Admin_Menu> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen,
+
           title: Text('Menu'),
         ),
         body: Container(
