@@ -87,7 +87,7 @@ class ReceiptModal{
 Row(children: [
 
   Text('Total'),
-  Expanded(child: Text(calculateTotal.toString(),style: TextStyle(color: Colors.green,fontSize: 22),))
+  Expanded(child: Text(calculateTotal().toString(),style: TextStyle(color: Colors.green,fontSize: 22),))
 ],)
 
 

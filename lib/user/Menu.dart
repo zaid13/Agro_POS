@@ -26,13 +26,13 @@ class _Admin_MenuState extends State<Customer_Menu> {
 
         body: Container(
 
-          child: Column(
-mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+// mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _button('Products',(){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_products(),));
 
-              }),
+              },'assets/product.jpeg'),
 
               Container(
                 height: 10,
@@ -40,14 +40,14 @@ mainAxisAlignment: MainAxisAlignment.center,
               _button('Customer',(){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_customer(),));
 
-              }),
+              },'assets/customer.jpeg'),
               Container(
                 height: 10,
               ),
               _button('Receipt',(){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_receipt(widget.userModal),));
 
-              }),
+              },'assets/reciept.jpeg'),
             ],
           ),
 
@@ -57,15 +57,27 @@ mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 
-  _button(txt,Function function){
+  _button(txt,Function function,imgname){
     return FlatButton(
       color: Colors.black.withOpacity(0.1),
 
       child: Container(
-          width: 100,
-          height:40,
+          width: MediaQuery.of(context).size.width  -20,
+          height:200,
           alignment: Alignment.center,
-          child: Text(txt)),
+          child: Column(
+            children: [
+              Container
+                (
+                  width: MediaQuery.of(context).size.width  -20,
+                  height:150,
+
+                  child: Image.asset(imgname,fit: BoxFit.fill,)),
+              Container(
+                   alignment: Alignment.center,
+                  child: Text(txt))
+            ],
+          )),
       onPressed: function,
     );
   }

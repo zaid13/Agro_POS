@@ -13,7 +13,10 @@ class Products_Modal{
 
 
   double calculateCost(){
-    return price * quantity_left;
+    if(price==null)
+      return 0;
+
+    return price ?? 1 * quantity_left ??  1;
 
   }
 

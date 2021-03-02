@@ -1,6 +1,7 @@
 import 'package:agro_pos/admin/auth/login.dart';
 import 'package:agro_pos/receipt/pdfGenerator/pdfGen.dart';
 import 'package:agro_pos/user/auth/login.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           future: SharedPreferences.getInstance(),
 
       builder: (context, snapshot){
+        return Splash();
             return  MyHomePage(title: 'Agro POS');
 
 
@@ -64,6 +66,32 @@ class MyHomePage extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+}
+
+class Splash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    
+    
+    Future.delayed(Duration(seconds: 3),(){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(title: 'Agro POS'),));
+    });
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+
+          children: [
+            Text('AGRO POS',style: TextStyle(fontSize:25,color: Colors.lightGreen,fontWeight: FontWeight.bold),),
+          ],
+        ),
+
+      ),
+
+    );
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -102,22 +130,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
-              // padding: EdgeInsets.all(20),
-              color: Colors.black.withOpacity(0.1),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Login(),));
-              },
-              child: Container(
-                width: 100,
-                height:40,
-                alignment: Alignment.center,
-                child: Text(
-                  'ADMIN',
+            Text('Hey there 👋🏼 \n Are you a User or Admin ',style: TextStyle(fontSize: 25),),
+Container(height: 100,),
+            Column(
+              children: [
+                FlatButton(
+                  // padding: EdgeInsets.all(20),
+                  color: Colors.black.withOpacity(0.1),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Login(),));
+                  },
+                  child: Container(
+                    width: 100,
+                    height:40,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ADMIN',
 
-                  style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             Container(
               height: 50,

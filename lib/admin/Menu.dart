@@ -25,37 +25,34 @@ class _Admin_MenuState extends State<Admin_Menu> {
           title: Text('Menu'),
         ),
         body: Container(
+child: GridView.count(
+  // Create a grid with 2 columns. If you change the scrollDirection to
+  // horizontal, this produces 2 rows.
+  crossAxisCount: 2,
+  // Generate 100 widgets that display their index in the List.
+  children: [
 
-          child: Column(
-mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _button('Products',(){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_products(),));
 
-              }),
-              Container(
-                height: 10,
-              ),
-              _button('Employees',(){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_employee(),));
+    _button(Icons.add_shopping_cart,'Products',(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_products(),));
 
-              }),
-              Container(
-                height: 10,
-              ),
-              _button('Customer',(){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_customer(),));
+    }),
+    _button(Icons.accessibility_new,'Employees',(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_employee(),));
 
-              }),
-              Container(
-                height: 10,
-              ),
-              _button('Receipt',(){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_receipt(widget.userModal),));
+    }),
+    _button(Icons.supervised_user_circle,'Customer',(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_customer(),));
 
-              }),
-            ],
-          ),
+    }),
+    _button(Icons.receipt,'Receipt',(){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Manage_receipt(widget.userModal),));
+
+    }),
+  ],
+),
+
+
 
 
         ),
@@ -63,16 +60,26 @@ mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 
-  _button(txt,Function function){
-    return FlatButton(
-      color: Colors.black.withOpacity(0.1),
+  _button(icon,txt,Function function){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RaisedButton(
 
-      child: Container(
-          width: 100,
-          height:40,
-          alignment: Alignment.center,
-          child: Text(txt)),
-      onPressed: function,
+
+        color: Colors.white,
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon,size: 35,),
+            Container(
+
+                alignment: Alignment.center,
+                child: Text(txt)),
+          ],
+        ),
+        onPressed: function,
+      ),
     );
   }
 }

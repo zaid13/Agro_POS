@@ -55,6 +55,45 @@ List<  Products_Modal> products_modal  = [Products_Modal()];
                     child: ListView(
 
                       children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: MaterialButton(
+                                color: Theme.of(context).accentColor,
+                                child: Text(
+                                  "Submit",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () async {
+                                  _formKey.currentState.save();
+                                  if (_formKey.currentState.validate()) {
+                                    print(_formKey.currentState.value);
+
+                                    var respose =  await registerReciept(_formKey.currentState.value);
+                                    showpopup(respose);
+
+
+                                  } else {
+                                    print("validation failed");
+                                  }
+                                },
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: MaterialButton(
+                                color: Theme.of(context).accentColor,
+                                child: Text(
+                                  "Reset",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  _formKey.currentState.reset();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                         FormBuilder(
                           key: _formKey,
                           // autovalidate: true,
@@ -201,45 +240,7 @@ List<  Products_Modal> products_modal  = [Products_Modal()];
                             ),
                           ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: MaterialButton(
-                                color: Theme.of(context).accentColor,
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () async {
-                                  _formKey.currentState.save();
-                                  if (_formKey.currentState.validate()) {
-                                    print(_formKey.currentState.value);
 
-                                    var respose =  await registerReciept(_formKey.currentState.value);
-                                    showpopup(respose);
-
-
-                                  } else {
-                                    print("validation failed");
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            Expanded(
-                              child: MaterialButton(
-                                color: Theme.of(context).accentColor,
-                                child: Text(
-                                  "Reset",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () {
-                                  _formKey.currentState.reset();
-                                },
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -304,6 +305,9 @@ var t;
 
     return t;
   }
+
+
+
   showpopup(res){
     if(res==null)
     {
