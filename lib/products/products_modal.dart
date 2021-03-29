@@ -1,4 +1,5 @@
 import 'package:agro_pos/admin/manage/manageProduct.dart';
+import 'package:agro_pos/products/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -105,17 +106,19 @@ class Products_Modal {
               children: [
                 IconButton(
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => Product_Update(this),)).then((value) =>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Manage_products(admin),)));
+
+
+                  },
                   icon: Icon(Icons.edit),
                 ),
                 IconButton(
                   color: Colors.red,
                   onPressed: () {
-                    FirebaseFirestore.instance.collection('product').doc(id).delete();
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Manage_products(admin),));
 
-
-
+                    FirebaseFirestore.instance.collection('product').doc(id).delete().then((value) =>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Manage_products(admin),)));
 
                   },
                   icon: Icon(Icons.delete),

@@ -9,8 +9,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
   import 'package:modal_progress_hud/modal_progress_hud.dart';
 
   class Manage_employee extends StatefulWidget {
-    bool admin ;
-    Manage_employee(this.admin);
     @override
     _Manage_employeeState createState() => _Manage_employeeState();
   }
@@ -138,7 +136,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
             onPressed: () {
               Navigator.push(context,MaterialPageRoute(builder: (context) => User_Register(),)).then((value) => {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Manage_employee(widget.admin),))
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Manage_employee(),))
 
               });
 

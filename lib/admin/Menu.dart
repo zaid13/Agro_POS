@@ -41,7 +41,7 @@ class _Admin_MenuState extends State<Admin_Menu> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Manage_employee(true),
+                      builder: (context) => Manage_employee(),
                     ));
               }),
               _button(Icons.supervised_user_circle, 'Customer', () {
@@ -57,6 +57,11 @@ class _Admin_MenuState extends State<Admin_Menu> {
               }),
               _button(Icons.history, 'Sales history', () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => SalesHistory(),));
+              }),
+
+              _button(Icons.logout, 'Log out', () {
+                
+                Navigator.pop(context);
               }),
             ],
           ),

@@ -7,7 +7,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:path_provider/path_provider.dart' ;
 import 'package:open_file/open_file.dart' as open_file;
 import 'dart:async';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:path_provider_ex/path_provider_ex.dart';

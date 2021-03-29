@@ -1,7 +1,9 @@
 
 
 
+import 'package:agro_pos/admin/manage/manageCustomer.dart';
 import 'package:agro_pos/admin/manage/manageEmployee.dart';
+import 'package:agro_pos/customer/auth/update.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +91,13 @@ class CustomerModal{
                     height: 40,
                     child: IconButton(
                       color: Colors.blue,
-                      onPressed: (){},
+                      onPressed: (){
+
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => Customer_Update(this),)).then((value)=> Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Manage_customer(),)));
+
+
+
+                      },
                       icon: Icon(Icons.edit),
 
 
@@ -99,9 +107,11 @@ class CustomerModal{
                     height: 40,
                     child: IconButton(
                       color: Colors.red,
-                      onPressed: (){
-                        
-                      },
+                      onPressed: () async {
+                        QuerySnapshot qs =  await FirebaseFirestore.instance.collection('customer').where("Email",isEqualTo: Email).get();
+                        FirebaseFirestore.instance.collection('customer').doc(qs.docs.first.id).delete();
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Manage_customer(),));
+                          },
                       icon: Icon(Icons.delete),
 
 
