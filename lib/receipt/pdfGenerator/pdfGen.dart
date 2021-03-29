@@ -11,7 +11,7 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:path_provider_ex/path_provider_ex.dart';
-
+import 'package:agro_pos/products/products_modal.dart';
 
 
 class CreatePdf  {
@@ -30,7 +30,7 @@ class CreatePdf  {
         bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
         pen: PdfPen(PdfColor(142, 170, 219, 255)));
     //Generate PDF grid.
-    final PdfGrid grid = getGrid();
+    final PdfGrid grid = getGrid(receiptModal);
     //Draw the header section by creating text element
     final PdfLayoutResult result = drawHeader(page, pageSize, grid,receiptModal);
     //Draw grid
@@ -169,7 +169,7 @@ class CreatePdf  {
   }
 
   //Create PDF grid and return
-  static PdfGrid getGrid() {
+  static PdfGrid getGrid(ReceiptModal receiptModal) {
     //Create a PDF grid
     final PdfGrid grid = PdfGrid();
     //Secify the columns count to the grid.
@@ -186,12 +186,24 @@ class CreatePdf  {
     headerRow.cells[3].value = 'Quantity';
     headerRow.cells[4].value = 'Total';
     //Add rows
-    addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 17.98, grid);
-    addProducts('LJ-0192', 'Long-Sleeve Logo Jersey,M', 49.99, 3, 149.97, grid);
-    addProducts('So-B909-M', 'Mountain Bike Socks,M', 9.5, 2, 19, grid);
-    addProducts('LJ-0192', 'Long-Sleeve Logo Jersey,M', 49.99, 4, 199.96, grid);
-    addProducts('FK-5136', 'ML Fork', 175.49, 6, 1052.94, grid);
-    addProducts('HL-U509', 'Sports-100 Helmet,Black', 34.99, 1, 34.99, grid);
+
+    // static void addProducts(String productId, String productName, double price,
+    //     int quantity, double total, PdfGrid grid) {
+
+
+    receiptModal.products_modal_list.forEach(( element) async {
+      addProducts(element.id,element.Name , element.price, element.quantity,  element.calculateCost(), grid);
+    });
+
+    // addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 17.98, grid);
+    // addProducts('LJ-0192', 'Long-Sleeve Logo Jersey,M', 49.99, 3, 149.97, grid);
+    // addProducts('So-B909-M', 'Mountain Bike Socks,M', 9.5, 2, 19, grid);
+    // addProducts('LJ-0192', 'Long-Sleeve Logo Jersey,M', 49.99, 4, 199.96, grid);
+    // addProducts('FK-5136', 'ML Fork', 175.49, 6, 1052.94, grid);
+    // addProducts('HL-U509', 'Sports-100 Helmet,Black', 34.99, 1, 34.99, grid);
+
+
+
     //Apply the table built-in style
     grid.applyBuiltInStyle(PdfGridBuiltInStyle.listTable4Accent5);
     //Set gird columns width

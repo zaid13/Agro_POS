@@ -16,105 +16,139 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class _User_LoginState extends State<User_Login> {
   final _formKey = GlobalKey<FormBuilderState>();
 bool  isloading = false;
+  var requestdata ;
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar:AppBar(
+          backgroundColor: Colors.lightGreen,
+
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text('Login Employee'),
+        ) ,
+        backgroundColor: Colors.white .withOpacity(0.7),
+
         body: ModalProgressHUD(
           inAsyncCall: isloading,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
 
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                // autovalidate: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FormBuilderTextField(
-                      name: 'Email',
-                      // initialValue: 'gehehe@zcapin.com',
-                      controller: TextEditingController(text:'gehehe@zcapin.com' ),
-                      decoration: InputDecoration(
-                        labelText:
-                        'Email',
+              children: <Widget>[
+                FormBuilder(
+                  key: _formKey,
+                  // autovalidate: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration:BoxDecoration(
+                          color:Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25))
+
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Email',
+
+                          // initialValue: 'gehehe@zcapin.com',
+                          controller: TextEditingController(text:'gehehe@zcapin.com' ),
+                          decoration: InputDecoration(
+                            labelText:
+                            'Email',
+
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                            //fillColor: Colors.gree
+                          ),
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                            FormBuilderValidators.email(context),
+                            FormBuilderValidators.max(context, 70),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                    FormBuilderTextField(
-                      name: 'Password',
+                      Container(height: 20,),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration:BoxDecoration(
+                            color:Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25))
+
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Password',
 // initialValue: 'gsgsgsg',
-                        controller: TextEditingController(text: 'gsgsgsg'),
-                      decoration: InputDecoration(
-                        labelText:
-                        'Password',
+                            controller: TextEditingController(text: 'gsgsgsg'),
+                          decoration: InputDecoration(
+                            labelText:
+                            'Password',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
 
+                          ),
+                          obscureText: true,
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+
+                            FormBuilderValidators.minLength(context,6),
+                            // FormBuilderValidators.(context),
+                            FormBuilderValidators.max(context, 70),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      obscureText: true,
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-
-                        FormBuilderValidators.minLength(context,6),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
+                      Container(height: 20,),
     ],
+                  ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        _formKey.currentState.save();
-                        if (_formKey.currentState.validate()) {
-                          print(_formKey.currentState.value);
+                MaterialButton(
+                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0)),
 
-                         var respose =  await Registeruser(_formKey.currentState.value);
-                         showpopup(respose);
+                  color: Colors.lightGreen,
 
 
-                        } else {
-                          print("validation failed");
-                        }
-                      },
+                  // color: Theme.of(context).accentColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Text
+                      (
+                      "Log in",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Reset",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        _formKey.currentState.reset();
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  onPressed: () async {
+                    _formKey.currentState.save();
+                    if (_formKey.currentState.validate()) {
+                      print(_formKey.currentState.value);
+
+                     var respose =  await Registeruser(_formKey.currentState.value);
+                     showpopup(respose);
+
+
+                    } else {
+                      print("validation failed");
+                    }
+                  },
+                ),
+
+              ],
+            ),
           ),
         ),
       ),
@@ -132,6 +166,7 @@ bool  isloading = false;
     if(ds.size==1)
       {
          t = ds.docs .first;
+         requestdata = ds;
 
       }
 
@@ -178,7 +213,10 @@ bool  isloading = false;
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {Navigator.pop(context);
-          UserModal userModal = UserModal().initUserModal(res );
+          UserModal userModal = UserModal().initUserModal(requestdata.docs[0] );
+
+print(userModal.Name);
+          print("userModal.Name");
 
           Navigator.push(context, MaterialPageRoute(builder: (context) => Customer_Menu(userModal )));
 

@@ -8,19 +8,26 @@ import 'package:flutter/material.dart';
 class UserModal{
   String Email;
   String Name;
+  String Phone;
 
 
   initUserModalfromMap(Map data){
 
     this.Email =data['Email'];
+
+    
     this.Name =data['Name']??'';
+    this.Phone =data['Phone']??'';
+
 
     return this;
   }
   initUserModal(QueryDocumentSnapshot data){
 
   this.Email =data.data()['Email'];
-  this.Name =data.data()['Name']??'';
+  this.Name =data.data()['Name']??data.data()['name'] ??'';
+  this.Phone =data.data()['Phone']??'';
+
 
   return this;
 }
@@ -30,70 +37,83 @@ class UserModal{
     initUserModal(data);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 80,
-        color: Colors.black.withOpacity(0.1),
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          crossAxisAlignment:CrossAxisAlignment.center ,
+      child: Material(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+        elevation: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment:MainAxisAlignment.center ,
+            crossAxisAlignment:CrossAxisAlignment.center ,
   children: [
-          Column(
+
+    Container(width: 10,),
+    Container(
+      width: 70,
+      height: 70,
+      child: Image.asset('assets/customer.jpeg',      width: 70,
+        height: 70,fit: BoxFit.fill ,),),
+    Container(width: 10,),
+    //
+    // Column(
+    //           mainAxisAlignment:MainAxisAlignment.center ,
+    //
+    //           crossAxisAlignment:CrossAxisAlignment.start ,
+    //       children: [
+    //         Text('    ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+    //         Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+    //         Text('Phone:    ' ,),
+    //
+    //
+    //       ],
+    //
+    //   ),
+      Expanded(
+          child: Column(
             mainAxisAlignment:MainAxisAlignment.center ,
 
             crossAxisAlignment:CrossAxisAlignment.start ,
-        children: [
-          Text('Name:    ',style: TextStyle(fontSize: 16),),
-          Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+            children: [
+              Text(Name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              Text(Email,style: TextStyle(fontSize: 16),),
+              Text(Phone,),
 
+            ],
 
-        ],
-
-      ),
-      Expanded(
-        child: Column(
-          mainAxisAlignment:MainAxisAlignment.center ,
-
-          crossAxisAlignment:CrossAxisAlignment.start ,
-          children: [
-            Text(Name,style: TextStyle(fontSize: 16),),
-            Text(Email,style: TextStyle(fontSize: 16),),
-
-          ],
-
-        ),
+          ),
       ),
     Column(
       children: [
 
-        SizedBox(
-           height: 40,
-          child: IconButton(
-            color: Colors.blue,
-            onPressed: (){},
-            icon: Icon(Icons.edit),
+          SizedBox(
+             height: 40,
+            child: IconButton(
+              color: Colors.blue,
+              onPressed: (){},
+              icon: Icon(Icons.edit),
 
 
+            ),
           ),
-        ),
-        SizedBox(
-          height: 40,
-          child: IconButton(
-            color: Colors.red,
-            onPressed: (){},
-            icon: Icon(Icons.delete),
+          SizedBox(
+            height: 40,
+            child: IconButton(
+              color: Colors.red,
+              onPressed: (){},
+              icon: Icon(Icons.delete),
 
 
+            ),
           ),
-        ),
       ],
     )
 
 
   ]
-          ,
+            ,
 ),
+        ),
       ),
     );
   }
@@ -102,51 +122,56 @@ class UserModal{
       initUserModal(data);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 80,
-        color: Colors.black.withOpacity(0.1),
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          crossAxisAlignment:CrossAxisAlignment.center ,
-          children: [
-            Column(
-              mainAxisAlignment:MainAxisAlignment.center ,
+      child: Material(
 
-              crossAxisAlignment:CrossAxisAlignment.start ,
-              children: [
-                Text('Name:    ',style: TextStyle(fontSize: 16),),
-                Text('Email:    ' ,style: TextStyle(fontSize: 16),),
-
-
-              ],
-
-            ),
-            Expanded(
-              child: Column(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+        elevation: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment:MainAxisAlignment.center ,
+            crossAxisAlignment:CrossAxisAlignment.center ,
+            children: [
+              Column(
                 mainAxisAlignment:MainAxisAlignment.center ,
 
                 crossAxisAlignment:CrossAxisAlignment.start ,
                 children: [
-                  Text(Name,style: TextStyle(fontSize: 16),),
-                  Text(Email,style: TextStyle(fontSize: 16),),
+                  Text('Name:    ',style: TextStyle(fontSize: 16),),
+                  Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+                  Text('Phone:    ' ,style: TextStyle(fontSize: 16),),
+
 
                 ],
 
               ),
-            ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment:MainAxisAlignment.center ,
+
+                  crossAxisAlignment:CrossAxisAlignment.start ,
+                  children: [
+                    Text(Name,style: TextStyle(fontSize: 16),),
+                    Text(Email,style: TextStyle(fontSize: 16),),
+                    Text(Phone,style: TextStyle(fontSize: 16),),
+
+                  ],
+
+                ),
+              ),
 
 
-          ]
-          ,
+            ]
+            ,
+          ),
         ),
       ),
     );
   }
 
     toMap(){
-    return {'Email':Email,'Name':Name};
+    return {'Email':Email,'Name':Name,'Phone':Phone};
 
     }
 }

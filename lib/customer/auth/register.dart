@@ -23,6 +23,7 @@ class _Customer_RegisterState extends State<Customer_Register> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.8),
         appBar:AppBar(
           backgroundColor: Colors.lightGreen,
 
@@ -32,95 +33,144 @@ class _Customer_RegisterState extends State<Customer_Register> {
         ) ,
         body: ModalProgressHUD(
           inAsyncCall: isloading,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
 
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                // autovalidate: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FormBuilderTextField(
-                      name: 'Email',
-                      decoration: InputDecoration(
-                        labelText:
-                        'Email',
+              children: <Widget>[
+                FormBuilder(
+                  key: _formKey,
+                  // autovalidate: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+
+
+                        ),
+
+                        child: FormBuilderTextField(
+                          name: 'Email',
+                          decoration: InputDecoration(
+                            labelText:
+                            'Email',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+
+
+                          ),
+
+
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                            FormBuilderValidators.email(context),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                    Container(height: 20,),
-                    FormBuilderTextField(
-                      name: 'Name',
+                      Container(height: 20,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Name',
 
-                      decoration: InputDecoration(
-                        labelText:
-                        'Name',
+                          decoration: InputDecoration(
+                            labelText:
+                            'Name',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                          ),
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
 
+                            FormBuilderValidators.required(context),
+                            // FormBuilderValidators.(context),
+
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
 
-                        FormBuilderValidators.minLength(context,1),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                  ],
+                      Container(height: 20,),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Phone',
+
+                          decoration: InputDecoration(
+                            labelText:
+                            'Phone',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                          ),
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+
+                            FormBuilderValidators.required(context),
+                            // FormBuilderValidators.(context),
+
+                          ]),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+
+                      Container(height: 20,),
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        _formKey.currentState.save();
-                        if (_formKey.currentState.validate()) {
-                          print(_formKey.currentState.value);
+                MaterialButton(
 
-                          var respose =  await Registeruser(_formKey.currentState.value);
-                          showpopup(respose);
+                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0)),
 
-
-                        } else {
-                          print("validation failed");
-                        }
-                      },
+                  color: Colors.lightGreen,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Text(
+                      "Add Customer",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Reset",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        _formKey.currentState.reset();
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  onPressed: () async {
+                    _formKey.currentState.save();
+                    if (_formKey.currentState.validate()) {
+                      print(_formKey.currentState.value);
+
+                      var respose =  await Registeruser(_formKey.currentState.value);
+                      showpopup(respose);
+
+
+                    } else {
+                      print("validation failed");
+                    }
+                  },
+                ),
+
+              ],
+            ),
           ),
         ),
       ),
@@ -186,7 +236,7 @@ class _Customer_RegisterState extends State<Customer_Register> {
           width: 120,
         )
       ],
-    ).show();
+    ).show().then((value) => Navigator.pop(context));
 
     // Manage_Employee
     // Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(),));

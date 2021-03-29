@@ -18,11 +18,14 @@ class _Admin_LoginState extends State<Admin_Login> {
 
   final _formKey = GlobalKey<FormBuilderState>();
   bool  isloading = false;
+  var requestdata ;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white .withOpacity(0.7),
+
         appBar:AppBar(
           backgroundColor: Colors.lightGreen,
 
@@ -32,181 +35,128 @@ class _Admin_LoginState extends State<Admin_Login> {
         ) ,
         body: ModalProgressHUD(
           inAsyncCall: isloading,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
 
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                // autovalidate: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FormBuilderTextField(
-                      // initialValue: 'Polo2322@gmail.com',
-                      controller: TextEditingController(text: 'Polo2322@gmail.com'),
-                      name: 'Email',
-                      decoration: InputDecoration(
+              children: <Widget>[
+                FormBuilder(
+                  key: _formKey,
+                  // autovalidate: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
 
-                        labelText:
-                        'Email',
+
+                      Container(
+                        decoration:BoxDecoration(
+                            color:Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25))
+
+                        ),
+                        child: FormBuilderTextField(
+                          // initialValue: 'Polo2322@gmail.com',
+                          controller: TextEditingController(text: 'Polo2322@gmail.com'),
+                          name: 'Email',
+                          decoration: InputDecoration(
+
+                            labelText:
+                            'Email',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                          ),
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                            FormBuilderValidators.email(context),
+                            FormBuilderValidators.max(context, 70),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                    FormBuilderTextField(
-                      name: 'Password',
+
+
+                      Container(height: 20,),
+
+
+                      Container(
+                        decoration:BoxDecoration(
+                            color:Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(25))
+
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Password',
 // initialValue: 'Admin1234',
-                    controller: TextEditingController(text: 'Admin1234'),
-                      decoration: InputDecoration(
-                        labelText:
-                        'Password',
+                        controller: TextEditingController(text: 'Admin1234'),
+                          decoration: InputDecoration(
+                            labelText:
+                            'Password',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
 
-                      ),
-                      obscureText: true,
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
+                          ),
+                          obscureText: true,
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
 
-                        FormBuilderValidators.minLength(context,6),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
+                            FormBuilderValidators.minLength(context,6),
+                            // FormBuilderValidators.(context),
+                            FormBuilderValidators.max(context, 70),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Container(height: 20,),
 
-                    /*             FormBuilderDropdown(
-                      name: 'gender',
-                      decoration: InputDecoration(
-                        labelText: 'Gender',
-                      ),
-                      // initialValue: 'Male',
-                      allowClear: true,
-                      hint: Text('Select Gender'),
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required(context)]),
-                      items: genderOptions
-                          .map((gender) => DropdownMenuItem(
-                        value: gender,
-                        child: Text('$gender'),
-                      ))
-                          .toList(),
-                    ),
-                    FormBuilderTypeAhead(
-                      decoration: InputDecoration(
-                        labelText: 'Country',
-                      ),
-                      name: 'country',
-                      onChanged: _onChanged,
-                      itemBuilder: (context, country) {
-                        return ListTile(
-                          title: Text(country),
-                        );
-                      },
-                      controller: TextEditingController(text: ''),
-                      initialValue: 'Uganda',
-                      suggestionsCallback: (query) {
-                        if (query.isNotEmpty) {
-                          var lowercaseQuery = query.toLowerCase();
-                          return allCountries.where((country) {
-                            return country.toLowerCase().contains(lowercaseQuery);
-                          }).toList(growable: false)
-                            ..sort((a, b) => a
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)
-                                .compareTo(
-                                b.toLowerCase().indexOf(lowercaseQuery)));
-                        } else {
-                          return allCountries;
-                        }
-                      },
-                    ),
-                    FormBuilderRadioList(
-                      decoration:
-                      InputDecoration(labelText: 'My chosen language'),
-                      name: 'best_language',
-                      onChanged: _onChanged,
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required(context)]),
-                      options: ['Dart', 'Kotlin', 'Java', 'Swift', 'Objective-C']
-                          .map((lang) => FormBuilderFieldOption(
-                        value: lang,
-                        child: Text('$lang'),
-                      ))
-                          .toList(growable: false),
-                    ),
-                    FormBuilderTouchSpin(
-                      decoration: InputDecoration(labelText: 'Stepper'),
-                      name: 'stepper',
-                      initialValue: 10,
-                      step: 1,
-                      iconSize: 48.0,
-                      addIcon: Icon(Icons.arrow_right),
-                      subtractIcon: Icon(Icons.arrow_left),
-                    ),
-                    FormBuilderRating(
-                      decoration: InputDecoration(labelText: 'Rate this form'),
-                      name: 'rate',
-                      iconSize: 32.0,
-                      initialValue: 1.0,
-                      max: 5.0,
-                      onChanged: _onChanged,
-                    ),*/
-                  ],
+
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        _formKey.currentState.save();
-                        if (_formKey.currentState.validate()) {
+                MaterialButton(
 
-                          
-                          print(_formKey.currentState.value);
-                          var respose =  await LoginUser(_formKey.currentState.value);
-                          showpopup(respose,_formKey.currentState.value);
-                        } else {
-                          print("validation failed");
-                        }
-                      },
+                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0)),
+
+                  color: Colors.lightGreen,
+                  // color: Theme.of(context).accentColor,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Text(
+                      "Log in",
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Reset",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        _formKey.currentState.reset();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              FlatButton(onPressed: (){
-                Navigator.push(context,MaterialPageRoute(builder: (context) => Admin_Register(),));
+                  onPressed: () async {
+                    _formKey.currentState.save();
+                    if (_formKey.currentState.validate()) {
 
-              }, child: Text('Register Admin'))
 
-            ],
+                      print(_formKey.currentState.value);
+                      var respose =  await LoginUser(_formKey.currentState.value);
+                      showpopup(respose,_formKey.currentState.value);
+                    } else {
+                      print("validation failed");
+                    }
+                  },
+                ),
+                SizedBox(width: 20),
+
+                FlatButton(onPressed: (){
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => Admin_Register(),));
+
+                }, child: Text('Register Admin'))
+
+              ],
+            ),
           ),
         ),
       ),
@@ -222,6 +172,7 @@ class _Admin_LoginState extends State<Admin_Login> {
     var t =null;
     if(ds.size>0)
     {
+      requestdata = ds;
       t ='sa';
 
     }
@@ -271,7 +222,7 @@ class _Admin_LoginState extends State<Admin_Login> {
           onPressed: () {
 
             Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModalfromMap(data )),));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(requestdata.docs[0] )),));
 
           },
 

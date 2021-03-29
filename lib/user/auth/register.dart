@@ -3,6 +3,7 @@
 
 import 'package:agro_pos/admin/Menu.dart';
 import 'package:agro_pos/user/modal/UserTileModal.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:agro_pos/admin/manage/manageEmployee.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _User_RegisterState extends State<User_Register> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.8),
         appBar:AppBar(
           backgroundColor: Colors.lightGreen,
 
@@ -34,349 +36,178 @@ class _User_RegisterState extends State<User_Register> {
         body: ModalProgressHUD(
           inAsyncCall: isloading,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
 
             children: <Widget>[
               FormBuilder(
                 key: _formKey,
                 // autovalidate: true,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    /*          FormBuilderFilterChip(
-                      name: 'filter_chip',
-                      decoration: InputDecoration(
-                        labelText: 'Select many options',
-                      ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Test', child: Text('Test')),
-                        FormBuilderFieldOption(
-                            value: 'Test 1', child: Text('Test 1')),
-                        FormBuilderFieldOption(
-                            value: 'Test 2', child: Text('Test 2')),
-                        FormBuilderFieldOption(
-                            value: 'Test 3', child: Text('Test 3')),
-                        FormBuilderFieldOption(
-                            value: 'Test 4', child: Text('Test 4')),
-                      ],
-                    ),
-                    FormBuilderChoiceChip(
-                      name: 'choice_chip',
-                      decoration: InputDecoration(
-                        labelText: 'Select an option',
-                      ),
-                      options: [
-                        FormBuilderFieldOption(
-                            value: 'Test', child: Text('Test')),
-                        FormBuilderFieldOption(
-                            value: 'Test 1', child: Text('Test 1')),
-                        FormBuilderFieldOption(
-                            value: 'Test 2', child: Text('Test 2')),
-                        FormBuilderFieldOption(
-                            value: 'Test 3', child: Text('Test 3')),
-                        FormBuilderFieldOption(
-                            value: 'Test 4', child: Text('Test 4')),
-                      ],
-                    ),
-                    FormBuilderColorPickerField(
-                      name: 'color_picker',
-                      // initialValue: Colors.yellow,
-                      colorPickerType: ColorPickerType.MaterialPicker,
-                      decoration: InputDecoration(labelText: 'Pick Color'),
-                    ),
-                    FormBuilderChipsInput(
-                      decoration: InputDecoration(labelText: 'Chips'),
-                      name: 'chips_test',
-                      onChanged: _onChanged,
-                      initialValue: [
-                        Contact('Andrew', 'stock@man.com',
-                            'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4057996.jpg'),
-                      ],
-                      maxChips: 5,
-                      findSuggestions: (String query) {
-                        if (query.isNotEmpty) {
-                          var lowercaseQuery = query.toLowerCase();
-                          return contacts.where((profile) {
-                            return profile.name
-                                .toLowerCase()
-                                .contains(query.toLowerCase()) ||
-                                profile.email
-                                    .toLowerCase()
-                                    .contains(query.toLowerCase());
-                          }).toList(growable: false)
-                            ..sort((a, b) => a.name
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)
-                                .compareTo(b.name
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)));
-                        } else {
-                          return const <Contact>[];
-                        }
-                      },
-                      chipBuilder: (context, state, profile) {
-                        return InputChip(
-                          key: ObjectKey(profile),
-                          label: Text(profile.name),
-                          avatar: CircleAvatar(
-                            backgroundImage: NetworkImage(profile.imageUrl),
-                          ),
-                          onDeleted: () => state.deleteChip(profile),
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        );
-                      },
-                      suggestionBuilder: (context, state, profile) {
-                        return ListTile(
-                          key: ObjectKey(profile),
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(profile.imageUrl),
-                          ),
-                          title: Text(profile.name),
-                          subtitle: Text(profile.email),
-                          onTap: () => state.selectSuggestion(profile),
-                        );
-                      },
-                    ),
-                    FormBuilderDateTimePicker(
-                      name: 'date',
-                      // onChanged: _onChanged,
-                      inputType: InputType.time,
-                      decoration: InputDecoration(
-                        labelText: 'Appointment Time',
-                      ),
-                      initialTime: TimeOfDay(hour: 8, minute: 0),
-                      // initialValue: DateTime.now(),
-                      // enabled: true,
-                    ),
-                    FormBuilderDateRangePicker(
-                      name: 'date_range',
-                      firstDate: DateTime(1970),
-                      lastDate: DateTime(2030),
-                      format: DateFormat('yyyy-MM-dd'),
-                      onChanged: _onChanged,
-                      decoration: InputDecoration(
-                        labelText: 'Date Range',
-                        helperText: 'Helper text',
-                        hintText: 'Hint text',
-                      ),
-                    ),
-                    FormBuilderSlider(
-                      name: 'slider',
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.min(context, 6),
-                      ]),
-                      onChanged: _onChanged,
-                      min: 0.0,
-                      max: 10.0,
-                      initialValue: 7.0,
-                      divisions: 20,
-                      activeColor: Colors.red,
-                      inactiveColor: Colors.pink[100],
-                      decoration: InputDecoration(
-                        labelText: 'Number of things',
-                      ),
-                    ),
-                    FormBuilderCheckbox(
-                      name: 'accept_terms',
-                      initialValue: false,
-                      onChanged: _onChanged,
-                      title: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'I have read and agree to the ',
-                              style: TextStyle(color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+
+                      Container(
+                        // color:Colors.white,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Email',
+                          decoration: InputDecoration(
+
+                            labelText:
+                            'Email',
+
+                            fillColor: Colors.white,
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
                             ),
-                            TextSpan(
-                              text: 'Terms and Conditions',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                          ],
+                            //fillColor: Colors.green
+
+                          ),
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                            FormBuilderValidators.email(context),
+                            FormBuilderValidators.max(context, 100),
+                          ]),
+                          keyboardType: TextInputType.text,
                         ),
                       ),
-                      validator: FormBuilderValidators.equal(
-                        context,
-                        true,
-                        errorText:
-                        'You must accept terms and conditions to continue',
+
+                      Container(height: 20,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Password',
+
+                          decoration: InputDecoration(
+                            labelText:
+                            'Password',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                            //fillColo
+
+                          ),
+                          obscureText: true,
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+
+                            FormBuilderValidators.minLength(context,6),
+                            // FormBuilderValidators.(context),
+
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                    ),*/
-                    FormBuilderTextField(
-                      name: 'Email',
-                      decoration: InputDecoration(
-                        labelText:
-                        'Email',
+                      Container(height: 20,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField(
+                          name: 'Name',
+
+                          decoration: InputDecoration(
+                            labelText:
+                            'Name',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                            //fillColo
+
+                          ),
+                          obscureText: false,
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+
+                            FormBuilderValidators.minLength(context,1),
+                            // FormBuilderValidators.(context),
+                            FormBuilderValidators.max(context, 100),
+                          ]),
+                          keyboardType: TextInputType.text,
+                        ),
                       ),
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                    FormBuilderTextField(
-                      name: 'Password',
+                      Container(height: 20,),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        child: FormBuilderTextField
+                          (
+                          name: 'Phone',
 
-                      decoration: InputDecoration(
-                        labelText:
-                        'Password',
+                          decoration: InputDecoration(
+                            labelText:
+                            'Phone',
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(
+                              ),
+                            ),
+                            //fillColo
 
+                          ),
+
+                          obscureText: false,
+                          onChanged: (d){},
+                          // valueTransformer: (text) => num.tryParse(text),
+                          validator: FormBuilderValidators.compose([
+
+                            FormBuilderValidators.numeric(context),
+                            // FormBuilderValidators.(context),
+
+                          ]),
+                          keyboardType: TextInputType.number,
+                        ),
                       ),
-                      obscureText: true,
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-
-                        FormBuilderValidators.minLength(context,6),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-                    FormBuilderTextField(
-                      name: 'Name',
-
-                      decoration: InputDecoration(
-                        labelText:
-                        'Name',
-
-                      ),
-                      obscureText: true,
-                      onChanged: (d){},
-                      // valueTransformer: (text) => num.tryParse(text),
-                      validator: FormBuilderValidators.compose([
-
-                        FormBuilderValidators.minLength(context,1),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
-                      ]),
-                      keyboardType: TextInputType.text,
-                    ),
-                    Container(height: 20,),
-
-                    /*             FormBuilderDropdown(
-                      name: 'gender',
-                      decoration: InputDecoration(
-                        labelText: 'Gender',
-                      ),
-                      // initialValue: 'Male',
-                      allowClear: true,
-                      hint: Text('Select Gender'),
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required(context)]),
-                      items: genderOptions
-                          .map((gender) => DropdownMenuItem(
-                        value: gender,
-                        child: Text('$gender'),
-                      ))
-                          .toList(),
-                    ),
-                    FormBuilderTypeAhead(
-                      decoration: InputDecoration(
-                        labelText: 'Country',
-                      ),
-                      name: 'country',
-                      onChanged: _onChanged,
-                      itemBuilder: (context, country) {
-                        return ListTile(
-                          title: Text(country),
-                        );
-                      },
-                      controller: TextEditingController(text: ''),
-                      initialValue: 'Uganda',
-                      suggestionsCallback: (query) {
-                        if (query.isNotEmpty) {
-                          var lowercaseQuery = query.toLowerCase();
-                          return allCountries.where((country) {
-                            return country.toLowerCase().contains(lowercaseQuery);
-                          }).toList(growable: false)
-                            ..sort((a, b) => a
-                                .toLowerCase()
-                                .indexOf(lowercaseQuery)
-                                .compareTo(
-                                b.toLowerCase().indexOf(lowercaseQuery)));
-                        } else {
-                          return allCountries;
-                        }
-                      },
-                    ),
-                    FormBuilderRadioList(
-                      decoration:
-                      InputDecoration(labelText: 'My chosen language'),
-                      name: 'best_language',
-                      onChanged: _onChanged,
-                      validator: FormBuilderValidators.compose(
-                          [FormBuilderValidators.required(context)]),
-                      options: ['Dart', 'Kotlin', 'Java', 'Swift', 'Objective-C']
-                          .map((lang) => FormBuilderFieldOption(
-                        value: lang,
-                        child: Text('$lang'),
-                      ))
-                          .toList(growable: false),
-                    ),
-                    FormBuilderTouchSpin(
-                      decoration: InputDecoration(labelText: 'Stepper'),
-                      name: 'stepper',
-                      initialValue: 10,
-                      step: 1,
-                      iconSize: 48.0,
-                      addIcon: Icon(Icons.arrow_right),
-                      subtractIcon: Icon(Icons.arrow_left),
-                    ),
-                    FormBuilderRating(
-                      decoration: InputDecoration(labelText: 'Rate this form'),
-                      name: 'rate',
-                      iconSize: 32.0,
-                      initialValue: 1.0,
-                      max: 5.0,
-                      onChanged: _onChanged,
-                    ),*/
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        _formKey.currentState.save();
-                        if (_formKey.currentState.validate()) {
-                          print(_formKey.currentState.value);
 
-                          var respose =  await Registeruser(_formKey.currentState.value);
-                          showpopup(respose);
+              MaterialButton(
+                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0)),
 
-
-                        } else {
-                          print("validation failed");
-                        }
-                      },
-                    ),
+                color: Colors.lightGreen,
+                child: Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Text(
+                    "Add Employee",
+                    style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: MaterialButton(
-                      color: Theme.of(context).accentColor,
-                      child: Text(
-                        "Reset",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        _formKey.currentState.reset();
-                      },
-                    ),
-                  ),
-                ],
+                ),
+                onPressed: () async {
+                  _formKey.currentState.save();
+                  if (_formKey.currentState.validate()) {
+                    print(_formKey.currentState.value);
+
+                    var respose =  await Registeruser(_formKey.currentState.value);
+                    showpopup(respose);
+
+
+                  } else {
+                    print("validation failed");
+                  }
+                },
               )
             ],
           ),
@@ -440,14 +271,17 @@ class _User_RegisterState extends State<User_Register> {
             "COOL",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () { Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
+          onPressed: () {
+            Navigator.pop(context);
+
+
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
 
           },
           width: 120,
         )
       ],
-    ).show();
+    ).show().then((value) =>    Navigator.pop(context) );
 
     // Manage_Employee
   }

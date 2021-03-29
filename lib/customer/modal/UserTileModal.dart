@@ -1,6 +1,7 @@
 
 
 
+import 'package:agro_pos/admin/manage/manageEmployee.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,14 @@ import 'package:flutter/material.dart';
 class CustomerModal{
   String Email;
   String Name;
+  String Phone;
 
   initCustomerModalfromMap(Map data){
 
     this.Email =data['Email'];
     this.Name =data['Name']??'';
+    this.Phone =data['Phone']??'';
+
 
     return this;
   }
@@ -21,6 +25,7 @@ class CustomerModal{
 
   this.Email =data.data()['Email'];
   this.Name =data.data()['Name']??'';
+  this.Phone =data.data()['Phone']??'';
 
   return this;
 }
@@ -28,72 +33,88 @@ class CustomerModal{
    getTile(data,context){
     if(this.Email==null)
     initCustomerModal(data);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 80,
-        color: Colors.black.withOpacity(0.1),
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          crossAxisAlignment:CrossAxisAlignment.center ,
-  children: [
-          Column(
+      child: Material(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+        elevation: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             mainAxisAlignment:MainAxisAlignment.center ,
+            crossAxisAlignment:CrossAxisAlignment.center ,
+            children: [
 
-            crossAxisAlignment:CrossAxisAlignment.start ,
-        children: [
-          Text('Name:    ',style: TextStyle(fontSize: 16),),
-          Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+              Container(width: 10,),
+              Container(
+                width: 70,
+                height: 70,
+                child: Image.asset('assets/customer.jpeg',      width: 70,
+                  height: 70,fit: BoxFit.fill ,),),
+              Container(width: 10,),
+              //
+              // Column(
+              //           mainAxisAlignment:MainAxisAlignment.center ,
+              //
+              //           crossAxisAlignment:CrossAxisAlignment.start ,
+              //       children: [
+              //         Text('    ',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              //         Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+              //         Text('Phone:    ' ,),
+              //
+              //
+              //       ],
+              //
+              //   ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment:MainAxisAlignment.center ,
+
+                  crossAxisAlignment:CrossAxisAlignment.start ,
+                  children: [
+                    Text(Name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                    Text(Email,style: TextStyle(fontSize: 16),),
+                    Text(Phone,),
+
+                  ],
+
+                ),
+              ),
+              Column(
+                children: [
+
+                  SizedBox(
+                    height: 40,
+                    child: IconButton(
+                      color: Colors.blue,
+                      onPressed: (){},
+                      icon: Icon(Icons.edit),
 
 
-        ],
-
-      ),
-      Expanded(
-        child: Column(
-          mainAxisAlignment:MainAxisAlignment.center ,
-
-          crossAxisAlignment:CrossAxisAlignment.start ,
-          children: [
-            Text(Name,style: TextStyle(fontSize: 16),),
-            Text(Email,style: TextStyle(fontSize: 16),),
-
-          ],
-
-        ),
-      ),
-    Column(
-      children: [
-
-        SizedBox(
-           height: 40,
-          child: IconButton(
-            color: Colors.blue,
-            onPressed: (){},
-            icon: Icon(Icons.edit),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: IconButton(
+                      color: Colors.red,
+                      onPressed: (){
+                        
+                      },
+                      icon: Icon(Icons.delete),
 
 
+                    ),
+                  ),
+                ],
+              )
+
+
+            ]
+            ,
           ),
         ),
-        SizedBox(
-          height: 40,
-          child: IconButton(
-            color: Colors.red,
-            onPressed: (){},
-            icon: Icon(Icons.delete),
-
-
-          ),
-        ),
-      ],
-    )
-
-
-  ]
-          ,
-),
       ),
     );
   }
@@ -102,43 +123,47 @@ class CustomerModal{
       initCustomerModal(data);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 80,
-        color: Colors.black.withOpacity(0.1),
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment:MainAxisAlignment.center ,
-          crossAxisAlignment:CrossAxisAlignment.center ,
-          children: [
-            Column(
-              mainAxisAlignment:MainAxisAlignment.center ,
-
-              crossAxisAlignment:CrossAxisAlignment.start ,
-              children: [
-                Text('Name:    ',style: TextStyle(fontSize: 16),),
-                Text('Email:    ' ,style: TextStyle(fontSize: 16),),
-
-
-              ],
-
-            ),
-            Expanded(
-              child: Column(
+      child: Material(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+        elevation: 12,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment:MainAxisAlignment.center ,
+            crossAxisAlignment:CrossAxisAlignment.center ,
+            children: [
+              Column(
                 mainAxisAlignment:MainAxisAlignment.center ,
 
                 crossAxisAlignment:CrossAxisAlignment.start ,
                 children: [
-                  Text(Name,style: TextStyle(fontSize: 16),),
-                  Text(Email,style: TextStyle(fontSize: 16),),
+                  Text('Name:    ',style: TextStyle(fontSize: 16),),
+                  Text('Email:    ' ,style: TextStyle(fontSize: 16),),
+                  Text('Phone:    ' ,style: TextStyle(fontSize: 16),),
+
 
                 ],
 
               ),
-            ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment:MainAxisAlignment.center ,
 
-          ]
-          ,
+                  crossAxisAlignment:CrossAxisAlignment.start ,
+                  children: [
+                    Text(Name,style: TextStyle(fontSize: 16),),
+                    Text(Email,style: TextStyle(fontSize: 16),),
+                    Text(Phone,style: TextStyle(fontSize: 16),),
+
+                  ],
+
+                ),
+              ),
+
+            ]
+            ,
+          ),
         ),
       ),
     );
@@ -147,7 +172,7 @@ class CustomerModal{
 
 
   toMap(){
-    return {'Email':Email,'Name':Name};
+    return {'Email':Email,'Name':Name,'Phone':Phone};
 
   }
 
