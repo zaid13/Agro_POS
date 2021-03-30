@@ -57,7 +57,7 @@ class _Admin_LoginState extends State<Admin_Login> {
                         ),
                         child: FormBuilderTextField(
                           // initialValue: 'Polo2322@gmail.com',
-                          controller: TextEditingController(text: 'Polo2322@gmail.com'),
+                          controller: TextEditingController(text: ''),
                           name: 'Email',
                           decoration: InputDecoration(
 
