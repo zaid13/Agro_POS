@@ -57,7 +57,7 @@ bool  isloading = false;
                           name: 'Email',
 
                           // initialValue: 'gehehe@zcapin.com',
-                          controller: TextEditingController(text:'gehehe@zcapin.com' ),
+                          controller: TextEditingController(text:'' ),
                           decoration: InputDecoration(
                             labelText:
                             'Email',
