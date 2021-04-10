@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -31,6 +32,39 @@ class _Receipt_RegisterState extends State<Receipt_Register> {
   CustomerModal customerModal = CustomerModal();
   List<Products_Modal> products_modal = [Products_Modal()];
   List<int> prod_quat = [];
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  void initState() {
+    super.initState();
+    var initializationSettingsAndroid =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOs = IOSInitializationSettings();
+    var initSetttings = InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOs);
+
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+      return ReciptPreview(
+          payload
+      );
+    }));
+  }
+  showNotification(id) async {
+    var android = AndroidNotificationDetails(
+        'id', 'channel ', 'description',
+        priority: Priority.High, importance: Importance.Max);
+    var iOS = IOSNotificationDetails();
+    var platform = new NotificationDetails(android, iOS);
+    await flutterLocalNotificationsPlugin.show(
+        0, 'AGRO POS', 'Receipt Created', platform,
+        payload:id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -320,6 +354,8 @@ class _Receipt_RegisterState extends State<Receipt_Register> {
               FlatButton(
                   color: Colors.green,
                   onPressed: () {
+
+
                     setState(() {
                       products_modal.add(Products_Modal());
                     });
@@ -404,7 +440,7 @@ class _Receipt_RegisterState extends State<Receipt_Register> {
     return id;
   }
 
-  showpopup(res) {
+  showpopup(res) async {
     if (res == null) {
       Alert(
         context: context,
@@ -424,7 +460,7 @@ class _Receipt_RegisterState extends State<Receipt_Register> {
       ).show();
       return;
     }
-
+    showNotification(res);
     Alert(
       context: context,
       type: AlertType.success,

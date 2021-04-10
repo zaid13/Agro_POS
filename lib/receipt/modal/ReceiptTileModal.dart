@@ -55,7 +55,6 @@ class ReceiptModal {
               onPressed: () {
 
 
-                showNotification();
                 CreatePdf.generateInvoice(this);
 
               },
@@ -176,29 +175,6 @@ Container(height: 15,),
     return cost;
   }
 
-  showNotification() async {
 
-    // TODO: implement initState
-    var initializationSettingsAndroid =
-    AndroidInitializationSettings('flutter_devs');
-    var initializationSettingsIOs = IOSInitializationSettings();
-    var initSetttings = InitializationSettings(
-        android: initializationSettingsAndroid,iOS: initializationSettingsIOs);
-
-    flutterLocalNotificationsPlugin.initialize(initSetttings,
-        );
-
-    
-
-
-    var android = AndroidNotificationDetails(
-        'id', 'channel ', 'description',
-        priority: Priority.high, importance: Importance.high);
-    var iOS = IOSNotificationDetails();
-    var platform = new NotificationDetails(android: android,iOS: iOS);
-    await flutterLocalNotificationsPlugin.show(
-        0, 'Flutter devs', 'Flutter Local Notification Demo', platform,
-        payload: 'Welcome to the Local Notification demo');
-  }
 }
 

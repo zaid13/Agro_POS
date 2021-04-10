@@ -94,40 +94,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
                 ),
               ),
 
-              // child: FormBuilderTextField(
-              //   name: 'Product',
-              //
-              //   decoration: InputDecoration(
-              //     labelText:
-              //     'Product',
-              //
-              //   ),
-              //   controller: searchCtrl,
-              //   onChanged: (d){
-              //     setState(() {
-              //       print('sw');
-              //       ds  =[];
-              //       // all.forEach((element) {
-              //       //   String name = element.data()['Name'];
-              //       //   if(name.startsWith(d))
-              //       //     ds.add(element);
-              //       //
-              //       // });
-              //     });
-              //
-              //
-              //
-              //   },
-              //   // valueTransformer: (text) => num.tryParse(text),
-              //   validator: FormBuilderValidators.compose([
-              //
-              //     FormBuilderValidators.required(context),
-              //     // FormBuilderValidators.(context),
-              //
-              //   ]),
-              //   keyboardType: TextInputType.text,
-              // ),
-              //
+
             ),
           ),
 

@@ -71,8 +71,7 @@ class _Admin_RegisterState extends State<Admin_Register> {
                       validator: FormBuilderValidators.compose([
 
                         FormBuilderValidators.minLength(context,6),
-                        // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
+
                       ]),
                       keyboardType: TextInputType.text,
                     ),
@@ -92,7 +91,7 @@ class _Admin_RegisterState extends State<Admin_Register> {
 
                         FormBuilderValidators.minLength(context,1),
                         // FormBuilderValidators.(context),
-                        FormBuilderValidators.max(context, 70),
+
                       ]),
                       keyboardType: TextInputType.text,
                     ),
@@ -155,6 +154,7 @@ class _Admin_RegisterState extends State<Admin_Register> {
 
     QuerySnapshot ds = await FirebaseFirestore.instance.collection('admin').where('Email',isEqualTo: data['Email']).get();
     var t =null;
+    print(ds.size);
     if(ds.size==0)
     {
       t = await FirebaseFirestore.instance.collection('admin').add(data);
@@ -202,8 +202,11 @@ class _Admin_RegisterState extends State<Admin_Register> {
             "COOL",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () {Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+
+          // Navigator.push(context, MaterialPageRoute(builder: (context) => Admin_Menu(UserModal().initUserModal(res )),));
 
           }          ,
           width: 120,

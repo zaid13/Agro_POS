@@ -8,9 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-    class User_Login extends StatefulWidget {
-  @override
-  _User_LoginState createState() => _User_LoginState();
+class User_Login extends StatefulWidget {
+@override
+_User_LoginState createState() => _User_LoginState();
 }
 
 class _User_LoginState extends State<User_Login> {
@@ -57,7 +57,7 @@ bool  isloading = false;
                           name: 'Email',
 
                           // initialValue: 'gehehe@zcapin.com',
-                          controller: TextEditingController(text:'gehehe@zcapin.com' ),
+                          controller: TextEditingController(text:'' ),
                           decoration: InputDecoration(
                             labelText:
                             'Email',
@@ -90,7 +90,7 @@ bool  isloading = false;
                         child: FormBuilderTextField(
                           name: 'Password',
 // initialValue: 'gsgsgsg',
-                            controller: TextEditingController(text: 'gsgsgsg'),
+                            controller: TextEditingController(text: ''),
                           decoration: InputDecoration(
                             labelText:
                             'Password',
@@ -105,10 +105,8 @@ bool  isloading = false;
                           onChanged: (d){},
                           // valueTransformer: (text) => num.tryParse(text),
                           validator: FormBuilderValidators.compose([
-
                             FormBuilderValidators.minLength(context,6),
-                            // FormBuilderValidators.(context),
-                            FormBuilderValidators.max(context, 70),
+
                           ]),
                           keyboardType: TextInputType.text,
                         ),

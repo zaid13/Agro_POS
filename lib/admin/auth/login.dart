@@ -57,7 +57,7 @@ class _Admin_LoginState extends State<Admin_Login> {
                         ),
                         child: FormBuilderTextField(
                           // initialValue: 'Polo2322@gmail.com',
-                          controller: TextEditingController(text: 'Polo2322@gmail.com'),
+                          controller: TextEditingController(text: ''),
                           name: 'Email',
                           decoration: InputDecoration(
 
@@ -93,7 +93,7 @@ class _Admin_LoginState extends State<Admin_Login> {
                         child: FormBuilderTextField(
                           name: 'Password',
 // initialValue: 'Admin1234',
-                        controller: TextEditingController(text: 'Admin1234'),
+                        controller: TextEditingController(text: ''),
                           decoration: InputDecoration(
                             labelText:
                             'Password',
@@ -111,7 +111,7 @@ class _Admin_LoginState extends State<Admin_Login> {
 
                             FormBuilderValidators.minLength(context,6),
                             // FormBuilderValidators.(context),
-                            FormBuilderValidators.max(context, 70),
+
                           ]),
                           keyboardType: TextInputType.text,
                         ),
